@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<head> 
+	
+    <meta charset="UTF-8">
+    <title>MatchmakerForTheWeb</title>
+  
+</head>
+
+<div style="background-color:rgb(221, 159, 159)">
+
+  
+ 
+  <b>
+  <h3 style="text-align:center">
+  
+    <br>MatchMaker For The Web</br> 
+    +++++++++++++++++++++++++++++++++++</br>
+    MatchMaker v.2<br>
+    Time to find you the perfect match<br>      
+    +++++++++++++++++++++++++++++++++++</p>
+  </h3> 
+  </b>
+  
+  <p>Welcome to Matchmaker On The Web. Let's find out if we are compatible together.</p>
+
+  <b></b>Follow these instructions</b></P> 
+
+  <p>There are 5 questions. Please answer the questions to fit you.</p> <p>After you answer the 5 questions, our compatibility will be measured.<p>
+
+    Hopefully we are a match<p>
+    
+    <label><b>Question 1: Going to the Movie Theatre is a good date idea.</b></label><br/>
+
+  <select id="q1">
+    <option value=""></option>
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br/>
+  <br/>
+  <label><b>Question 2: Going to the gym is necessary in my life.</b></label><br/>
+
+  <select id="q2">
+    <option value=""></option>
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br/>
+  <br/>
+  <label><b>Question 3: Chic-fil-a is the worst fast food restaurant.</b></label><br/>
+
+  <select id="q3">
+    <option value=""></option>
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+
+  <br/>
+  <br/>
+  <label><b>Question 4: I want more than 1 kid.</b></label><br/>
+
+  <select id="q4">
+    <option value=""></option>
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+
+  <br /><br />
+  <label><b>Question 5: I want to live in Illinois for the rest of my life.</b></label><br></br>
+
+  <select id="q5">
+    <option value=""></option>
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+
+  <br /><br />
+
+  <button onclick="CalculateCompatibility()">Calculate Compatibility</button>
+  <p id="Error"></p>
+  <p id="Compatibility"></p>
+
+<script>
+
+function CalculateCompatibility() {
+
+  document.getElementById("Error").innerHTML = "";
+  document.getElementById("Compatibility").innerHTML = "";
+
+    const STONGEST_ANSWER = [
+      5, // question 1 strongly agree
+      5, // question 2 stongly disagree 
+      1, // question 3 disagree
+      4, // question 4 agree
+      1, // question 5 strongly disagree
+    ]
+    let question1Response = document.getElementById('q1').selectedOptions[0].value;
+    let question2Response = document.getElementById('q2').selectedOptions[0].value;
+    let question3Response = document.getElementById('q3').selectedOptions[0].value;
+    let question4Response = document.getElementById('q4').selectedOptions[0].value;
+    let question5Response = document.getElementById('q5').selectedOptions[0].value;
+
+    if (question1Response == "") {
+      document.getElementById("Error").innerHTML = "Please answer question 1";
+      return;
+    }
+    if (question2Response == "") {
+      document.getElementById("Error").innerHTML = "Please answer question 2";
+      return;
+    }
+    if (question3Response == "") {
+      document.getElementById("Error").innerHTML = "Please answer question 3";
+      return;
+    }
+    if (question4Response == "") {
+      document.getElementById("Error").innerHTML = "Please answer question 4";
+      return;
+    }
+    if (question5Response == "") {
+      document.getElementById("Error").innerHTML = "Please answer question 5";
+      return;
+    }
+
+    let compatibility1 =2-Math.abs(question1Response-STONGEST_ANSWER[0]);
+    let compatibility2 =5-Math.abs(question2Response-STONGEST_ANSWER[1]);
+    let compatibility3 =3-Math.abs(question3Response-STONGEST_ANSWER[2]);
+    let compatibility4 =4-Math.abs(question4Response-STONGEST_ANSWER[3]);
+    let compatibility5 =1-Math.abs(question5Response-STONGEST_ANSWER[4]);
+	  
+	  let totalCompatibility = (compatibility1 + compatibility2 + compatibility3 + compatibility4 + compatibility5);   
+    totalCompatibility = totalCompatibility * 10;
+
+    let categories1 = "<b>WE ARE A PERFECT MATCH!</b>"
+    let categories2 = "We are really similar"
+    let categories3 = "Stay away from me"
+    let useroutput = "Your compatibility is: " + totalCompatibility + "% <br/>"
+
+    if (totalCompatibility > 79){
+      useroutput += categories1;
+    }
+      else if (totalCompatibility >= 59 || totalCompatibility >= 79){
+      useroutput +=categories2;
+    }    
+      else { 
+      useroutput +=categories3;
+    }
+    
+    document.getElementById("Compatibility").innerHTML = useroutput;
+
+}
+</script>
+
+
+</div>
+
+</body>
+</html>
